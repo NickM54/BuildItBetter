@@ -1,78 +1,15 @@
-import * as msal from "@azure/msal-browser";
+import { initializeApp, type FirebaseOptions } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
 
-/**
- * Configuration object to be passed to MSAL instance on creation.
- * For a full list of MSAL.js configuration parameters, visit:
- * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/configuration.md
- */
-const msalConfig: msal.Configuration = {
-  auth: {
-    clientId: "50d0d3fc-1092-4482-93f5-12ad276dd3ba",
-    // WORKFORCE TENANT
-    authority:
-      "https://login.microsoftonline.com/ebafc936-f2bd-4f97-8b87-8d3381e6c982", //  Replace the placeholder with your tenant info
-    // EXTERNAL TENANT
-    // authority: "https://Enter_the_Tenant_Subdomain_Here.ciamlogin.com/", // Replace the placeholder with your tenant subdomain
-    redirectUri: "http://localhost:3000", // You must register this URI on App Registration. Defaults to window.location.href e.g. http://localhost:3000/
-    navigateToLoginRequestUrl: true, // If "true", will navigate back to the original request location before processing the auth code response.
-  },
-  cache: {
-    cacheLocation: "sessionStorage", // Configures cache location. "sessionStorage" is more secure, but "localStorage" gives you SSO.
-    storeAuthStateInCookie: false, // set this to true if you have to support IE
-  },
-  system: {
-    loggerOptions: {
-      loggerCallback: (level, message, containsPii) => {
-        if (containsPii) {
-          return;
-        }
-        switch (level) {
-          case msal.LogLevel.Error:
-            console.error(message);
-            return;
-          case msal.LogLevel.Info:
-            console.info(message);
-            return;
-          case msal.LogLevel.Verbose:
-            console.debug(message);
-            return;
-          case msal.LogLevel.Warning:
-            console.warn(message);
-            return;
-        }
-      },
-    },
-  },
+const firebaseConfig: FirebaseOptions = {
+  apiKey: "AIzaSyAGcJHbc594f6ce56aTROY3XQojHJJLmTo",
+  authDomain: "build-it-better-c97cd.firebaseapp.com",
+  projectId: "build-it-better-c97cd",
+  storageBucket: "build-it-better-c97cd.firebasestorage.app",
+  messagingSenderId: "50216009079",
+  appId: "1:50216009079:web:568aeabe9b1a9059263572",
+  measurementId: "G-4381V0NDR1",
 };
 
-/**
- * Scopes you add here will be prompted for user consent during sign-in.
- * By default, MSAL.js will add OIDC scopes (openid, profile, email) to any login request.
- * For more information about OIDC scopes, visit:
- * https://learn.microsoft.com/en-us/entra/identity-platform/permissions-consent-overview#openid-connect-scopes
- */
-const loginRequest = {
-  scopes: ["User.Read"],
-};
-
-/**
- * An optional silentRequest object can be used to achieve silent SSO
- * between applications by providing a "login_hint" property.
- */
-
-// const silentRequest = {
-//   scopes: ["openid", "profile"],
-//   loginHint: "example@domain.net"
-// };
-
-// exporting config object for jest
-// if (typeof exports !== "undefined") {
-//   module.exports = {
-//     msalConfig: msalConfig,
-//     loginRequest: loginRequest,
-//   };
-// }
-
-const app = new msal.PublicClientApplication(msalConfig);
-
-export default app;
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);

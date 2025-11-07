@@ -27,40 +27,40 @@ class ProjectApi {
   }
 
   public async List(): Promise<ProjectListViewModel[]> {
-    return [
-      {
-        id: "1",
-        description: "Test 1",
-        name: "Test 1",
-      },
-      {
-        id: "2",
-        description: "Test 2",
-        name: "Test 2",
-      },
-      {
-        id: "3",
-        description: "Test 3",
-        name: "Test 3",
-      },
-      {
-        id: "4",
-        description: "Test 4",
-        name: "Test 4",
-      },
-      {
-        id: "5",
-        description: "Test 5",
-        name: "Test 5",
-      },
-      {
-        id: "6",
-        description: "Test 6",
-        name: "Test 6",
-      },
-    ];
+    // return [
+    //   {
+    //     id: "1",
+    //     description: "Test 1",
+    //     name: "Test 1",
+    //   },
+    //   {
+    //     id: "2",
+    //     description: "Test 2",
+    //     name: "Test 2",
+    //   },
+    //   {
+    //     id: "3",
+    //     description: "Test 3",
+    //     name: "Test 3",
+    //   },
+    //   {
+    //     id: "4",
+    //     description: "Test 4",
+    //     name: "Test 4",
+    //   },
+    //   {
+    //     id: "5",
+    //     description: "Test 5",
+    //     name: "Test 5",
+    //   },
+    //   {
+    //     id: "6",
+    //     description: "Test 6",
+    //     name: "Test 6",
+    //   },
+    // ];
 
-    const apiModels = (await apiClient.get<ProjectApiModel[]>(this._base_url))
+    const apiModels = (await apiClient.get<ProjectApiModel[]>("list-projects"))
       .data;
 
     return apiModels.map((apiModel) =>
