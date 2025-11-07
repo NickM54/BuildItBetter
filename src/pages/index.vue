@@ -6,12 +6,19 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import { VProgressCircular } from "vuetify/components";
+import {
+  googleAuthProvider,
+  FirebaseAuthService,
+} from "@/services/firebase_app";
 
 const initialized = ref(false);
 
 async function initialize(): Promise<void> {
-  // Logic to init the app
   try {
+    // Logic to init the app
+    const auth = FirebaseAuthService.getAuth();
+
+    await FirebaseAuthService.signInWithPopup(auth, googleAuthProvider);
   } catch (error) {
     alert(error);
   }
