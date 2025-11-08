@@ -19,6 +19,7 @@ async function initialize(): Promise<void> {
     const auth = FirebaseAuthService.getAuth();
 
     await FirebaseAuthService.signInWithPopup(auth, googleAuthProvider);
+    initialized.value = true;
   } catch (error) {
     alert(error);
   }

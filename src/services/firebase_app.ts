@@ -1,6 +1,7 @@
 import { initializeApp, type FirebaseOptions } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { GoogleAuthProvider } from "firebase/auth";
+import { getFunctions } from "firebase/functions";
 
 const firebaseConfig: FirebaseOptions = {
   apiKey: "AIzaSyAGcJHbc594f6ce56aTROY3XQojHJJLmTo",
@@ -15,5 +16,6 @@ const firebaseConfig: FirebaseOptions = {
 export const app = initializeApp(firebaseConfig);
 export const analytics = getAnalytics(app);
 export const googleAuthProvider = new GoogleAuthProvider();
+export const functions = getFunctions();
 
 export * as FirebaseAuthService from "firebase/auth";
